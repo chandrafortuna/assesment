@@ -16,12 +16,8 @@ type Container struct {
 	Balls []*Ball
 }
 
-func NewContainer(id int, max int, b []*Ball) *Container {
+func NewContainer(id int, max int, balls []*Ball) *Container {
 
-	balls := []*Ball{}
-	for range b {
-		balls = append(balls, NewBall())
-	}
 	return &Container{
 		ID:    id,
 		Max:   max,

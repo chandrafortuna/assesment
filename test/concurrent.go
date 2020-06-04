@@ -1,17 +1,30 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 )
 
 func MakeRequest(url string, ch chan<- string) {
 	start := time.Now()
-	r := strings.NewReader("")
+
+	// product test concurrent
+	var jsonStr = []byte(`
+	{
+		"customerId": "user01",
+		"productVariantId": 1,
+		"qty": 1
+	}
+	`)
+	r := bytes.NewBuffer(jsonStr)
+
+	// ball test concurrent
+	// r := strings.NewReader("")
+
 	resp, _ := http.Post(url, "application/json", r)
 	secs := time.Since(start).Seconds()
 	body, _ := ioutil.ReadAll(resp.Body)
@@ -31,3 +44,5 @@ func main() {
 }
 
 // time ./concurrent http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer http://localhost:8000/balls/addToContainer
+
+// time ./concurrent http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve http://localhost:8000/productVariant/reserve
