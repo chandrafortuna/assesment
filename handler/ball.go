@@ -51,3 +51,23 @@ func (h *BallHandler) AddBallToContainer(w http.ResponseWriter, r *http.Request)
 
 	ReplySuccess(&w, res)
 }
+
+func (h *BallHandler) GetAllContainers(w http.ResponseWriter, r *http.Request) {
+	res, err := h.service.GetAllContainer()
+	if err != nil {
+		ReplyError(&w, http.StatusInternalServerError, "Get Container Failed:", err)
+		return
+	}
+
+	ReplySuccess(&w, res)
+}
+
+func (h *BallHandler) GetVerifiedContainer(w http.ResponseWriter, r *http.Request) {
+	res, err := h.service.GetVerifiedContainer()
+	if err != nil {
+		ReplyError(&w, http.StatusInternalServerError, "Get Container Failed:", err)
+		return
+	}
+
+	ReplySuccess(&w, res)
+}

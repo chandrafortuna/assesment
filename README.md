@@ -1,7 +1,3 @@
-# Simple Messaging API
-
-API for sending and retrieve message. 
-
 ## Getting Started
 
 Cloned copies of this repository must be placed in the correct location in the GOPATH

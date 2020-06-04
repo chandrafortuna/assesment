@@ -1,8 +1,14 @@
 package ball
 
-import "errors"
+import (
+	"errors"
+)
 
 type Ball struct{}
+
+func NewBall() *Ball {
+	return &Ball{}
+}
 
 type Container struct {
 	ID    int
@@ -10,8 +16,22 @@ type Container struct {
 	Balls []*Ball
 }
 
+func NewContainer(id int, max int, b []*Ball) *Container {
+
+	balls := []*Ball{}
+	for range b {
+		balls = append(balls, NewBall())
+	}
+	return &Container{
+		ID:    id,
+		Max:   max,
+		Balls: balls,
+	}
+}
+
 func (c *Container) IsVerified() bool {
 	return len(c.Balls) >= c.Max
+
 }
 
 type InitRequest struct {
