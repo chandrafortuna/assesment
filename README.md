@@ -22,19 +22,12 @@ The following table shows the HTTP methods and URLs that represent the action su
 | ------------- | ------------- |
 | `POST /balls/init`  | Initial Setup container  |
 | `POST /balls/addToContainer`  | Add ball into random container  |
-
-Make a POST request to the /balls/init endpoint 
-Request Body:
-```
-{
-	"numContainer": 2, //specify number container used
-	"maxLoad": 10 // maximum ball capacity of each container
-}
-```
+| `GET /containers`  | Get all container  |
+| `GET /containers/verified`  | Get verified container  |
+| `GET /productVariant`  | Get All product variant  |
+| `POST /productVariant`  | Add Product Variant  |
+| `POST /productVariant/reserve¸`  | Reduce Qty from Product Variant  |
+| `POST /homekey`  | Joni's Key Solution  |
 
 
-## Running the tests
-
-```
-go test ./test/
-```
+For example request, please find and import assessment collection in the source code.

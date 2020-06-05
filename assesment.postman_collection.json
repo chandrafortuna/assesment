@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "710c7673-27cd-45b5-85fa-dce59c2fe80d",
+		"name": "Evermos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ball - Init Ball Services",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numContainer\": 10,\n\t\"maxLoad\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_url}}/balls/init"
+			},
+			"response": []
+		},
+		{
+			"name": "Ball - Add Ball Random to Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "{{host_url}}/balls/addToContainer"
+			},
+			"response": []
+		},
+		{
+			"name": "Ball - Get Containers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "{{host_url}}/containers"
+			},
+			"response": []
+		},
+		{
+			"name": "Ball - Get Verified Container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "{{host_url}}/containers/verified"
+			},
+			"response": []
+		},
+		{
+			"name": "Product - Add Product Variant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"sku\": \"sku-001Lred\",\n\t\"size\": \"L\",\n\t\"color\": \"red\",\n\t\"qty\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_url}}/productVariant"
+			},
+			"response": []
+		},
+		{
+			"name": "Product - GET All Product Variant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host_url}}/productVariant"
+			},
+			"response": []
+		},
+		{
+			"name": "Product - Reduce Qty",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"customerId\": \"user01\",\n\t\"productVariantId\": 1,\n\t\"qty\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_url}}/productVariant/reserve"
+			},
+			"response": []
+		},
+		{
+			"name": "Joni's Key - Solution",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"matrix\": [\n\t\t[\"#\", \"#\", \"#\", \"#\", \"#\", \"#\", \"#\", \"#\"], \n\t\t[\"#\", \".\", \".\", \".\", \".\", \".\", \".\", \"#\"], \n\t\t[\"#\", \".\", \"#\", \"#\", \"#\", \".\", \".\", \"#\"], \n\t\t[\"#\", \".\", \".\", \".\", \"#\", \".\", \"#\", \"#\"], \n\t\t[\"#\", \".\", \"#\", \".\", \".\", \".\", \".\", \"#\"],\n\t\t[\"#\", \"#\", \"#\", \"#\", \"#\", \"#\", \"#\", \"#\"]\n\t],\n\t\"startPoint\": {\n\t\t\"x\": 4,\n\t\t\"y\": 1\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_url}}/homekey"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
