@@ -86,8 +86,11 @@ func (r *MemoryRepository) Clear() error {
 
 func NewRepository() (r Repository) {
 	r = &MemoryRepository{
-		productVariants: []*ProductVariant{},
-		m:               &sync.Mutex{},
+		productVariants: []*ProductVariant{
+			NewProductVariant(1, "SKU001LRED", "L", "red", 2),
+			NewProductVariant(2, "SKU001LGREEN", "L", "green", 2),
+		},
+		m: &sync.Mutex{},
 	}
 	return
 }

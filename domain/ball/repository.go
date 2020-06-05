@@ -103,9 +103,13 @@ func (r *MemoryRepository) GetContainerByID(containerId int) (*Container, error)
 
 func NewRepository() (r Repository) {
 	r = &MemoryRepository{
-		containers: []*Container{},
-		verified:   nil,
-		m:          &sync.Mutex{},
+		containers: []*Container{
+			NewContainer(1, 10, []*Ball{}),
+			NewContainer(2, 10, []*Ball{}),
+			NewContainer(3, 10, []*Ball{}),
+		},
+		verified: nil,
+		m:        &sync.Mutex{},
 	}
 	return
 }

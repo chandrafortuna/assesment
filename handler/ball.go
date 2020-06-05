@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -45,10 +46,12 @@ func (h *BallHandler) Init(w http.ResponseWriter, r *http.Request) {
 func (h *BallHandler) AddBallToContainer(w http.ResponseWriter, r *http.Request) {
 	res, err := h.service.AddBallToContainer()
 	if err != nil {
+		log.Println("Error:", err)
 		ReplyError(&w, http.StatusInternalServerError, "Add Ball To Container Failed:", err)
 		return
 	}
 
+	log.Println(fmt.Sprintf("Add Ball To Container success container ID:%v isVerified:%v ", res.ID, res.IsVerified()))
 	ReplySuccess(&w, res)
 }
 

@@ -48,6 +48,14 @@ type ReserveProductReq struct {
 	Qty              int    `json:"qty"`
 }
 
+func (req *ReserveProductReq) Validate() error {
+	if req.Qty <= 0 {
+		return errors.New("Quantity must be > 0")
+	}
+
+	return nil
+}
+
 type ReserveProductResponse struct {
 	Success bool               `json:"success"`
 	Message string             `json:"message"`

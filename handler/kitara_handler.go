@@ -24,13 +24,13 @@ func (h *KitaraHandler) Init(w http.ResponseWriter, r *http.Request) {
 	var req kt.ProductVariant
 	if err := decoder.Decode(&req); err != nil {
 		log.Println("Error:", err)
-		ReplyError(&w, http.StatusBadRequest, "Init failed : ", err)
+		ReplyError(&w, http.StatusBadRequest, "Create Product failed : ", err)
 		return
 	}
 
 	res, err := h.service.InitData(req)
 	if err != nil {
-		ReplyError(&w, http.StatusBadRequest, "Init failed : ", err)
+		ReplyError(&w, http.StatusBadRequest, "Create Product failed : ", err)
 		return
 	}
 
@@ -42,24 +42,33 @@ func (h *KitaraHandler) Reserve(w http.ResponseWriter, r *http.Request) {
 	var req kt.ReserveProductReq
 	if err := decoder.Decode(&req); err != nil {
 		log.Println("Error:", err)
-		ReplyError(&w, http.StatusBadRequest, "Init failed : ", err)
+		ReplyError(&w, http.StatusBadRequest, "Reserve failed : ", err)
+		return
+	}
+
+	err := req.Validate()
+	if err != nil {
+		ReplyError(&w, http.StatusBadRequest, "Reserve failed : ", err)
 		return
 	}
 
 	res, err := h.service.Reserve(req)
 	if err != nil {
-		ReplyError(&w, http.StatusBadRequest, "Init failed : ", err)
+		log.Println("Error:", err)
+		ReplyError(&w, http.StatusBadRequest, "Reserve failed : ", err)
 		return
 	}
 
-	fmt.Printf("Order Status: %v, Qty: %v", res.Success, res.Data.Qty)
+	log.Println(fmt.Sprintf("Order Status: %v, Qty: %v", res.Success, res.Data.Qty))
+	log.Println("Error:", err)
 	ReplySuccess(&w, &res)
 }
 
 func (h *KitaraHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	res, err := h.service.GetAll()
 	if err != nil {
-		ReplyError(&w, http.StatusInternalServerError, "Get Container Failed:", err)
+		log.Println("Error:", err)
+		ReplyError(&w, http.StatusInternalServerError, "Get Product Variant Failed:", err)
 		return
 	}
 

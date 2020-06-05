@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	ball "github.com/chandrafortuna/assesment/domain/ball"
+	hk "github.com/chandrafortuna/assesment/domain/homekey"
 	kt "github.com/chandrafortuna/assesment/domain/kitara"
 	h "github.com/chandrafortuna/assesment/handler"
 	"github.com/gorilla/mux"
@@ -20,6 +21,9 @@ func main() {
 	kitaraService := kt.NewService(kitaraRepository)
 	kitaraHandler := h.NewKitaraHandler(kitaraService)
 
+	homekeyService := hk.NewService()
+	homekeyHandler := h.NewHomekeyHandler(homekeyService)
+
 	router := mux.NewRouter()
 	router.HandleFunc("/balls/addToContainer", ballHandler.AddBallToContainer).Methods("POST")
 	router.HandleFunc("/balls/init", ballHandler.Init).Methods("POST")
@@ -30,6 +34,8 @@ func main() {
 	router.HandleFunc("/productVariant", kitaraHandler.GetAll).Methods("GET")
 	router.HandleFunc("/productVariant", kitaraHandler.Clear).Methods("DEL")
 	router.HandleFunc("/productVariant/reserve", kitaraHandler.Reserve).Methods("POST")
+
+	router.HandleFunc("/homekey", homekeyHandler.GetSolution).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
